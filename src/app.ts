@@ -1,4 +1,5 @@
 import { Component } from "./components/component.js";
+import { InputDialog } from "./components/dialog/dialog.js";
 import { ImageComponent } from "./components/page/item/image.js";
 import { NoteComponent } from "./components/page/item/note.js";
 import { TodoComponent } from "./components/page/item/todo.js";
@@ -28,6 +29,20 @@ class App {
         this.page.addChild(todo); 
         // todo.attachTo(appRoot, 'beforeend');
 
+        const imageBtn = document.querySelector('#new-image')! as HTMLButtonElement;
+        imageBtn.addEventListener('click', () => {
+            const dialog = new InputDialog();
+
+            dialog.setOnCloseListener(() => {
+                dialog.removeFrom(document.body);
+            });
+            dialog.setOnSubmitListener(() => {
+                //섹션을 만들어서 페이지에 추가해 준다
+                dialog.removeFrom(document.body)
+            });
+
+            dialog.attachTo(document.body);
+        })
     }
 }
 

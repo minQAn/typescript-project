@@ -49,7 +49,7 @@ export class PageComponent extends BaseComponent<HTMLUListElement> implements Co
     }
 
     addChild(section: Component) {
-        const item = new this.pageItemConstructor();
+        const item = new this.pageItemConstructor(); // 재사용성 향상의 근본적인 이유와 핵심 Line
         item.addChild(section); // 각 section을 page-item__body에 삽입
         item.attachTo(this.element, 'beforeend'); // this.element == <ul class="page"></ul>        
         item.setOnCloseListener(() => {
