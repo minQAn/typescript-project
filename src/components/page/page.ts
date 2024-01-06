@@ -6,7 +6,18 @@ export interface Composable {
 
 type OnCloseListner = () => void; // callback function
 
-class PageItemComponent extends BaseComponent<HTMLElement> implements Composable{
+// 재사용성 향상을 위해
+interface SectionContainer extends Component, Composable {
+    setOnCloseListener(listner: OnCloseListner): void;
+}
+
+type SectionContainerConstructor = {
+    new (): SectionContainer;
+
+};
+
+// 예를들어 DarkPageItemComponent.. 등을 만든다면 좀더 유연하게 확장 할 수 있다.
+export class PageItemComponent extends BaseComponent<HTMLElement> implements SectionContainer{
     private closeListner?: OnCloseListner;
     constructor() {
         super(`<li class="page-item">
@@ -32,25 +43,13 @@ class PageItemComponent extends BaseComponent<HTMLElement> implements Composable
     }
 }
 
-// export class PageComponent {
-//     private element: HTMLUListElement;
-//     constructor() {
-//         this.element = document.createElement('ul');
-//         this.element.setAttribute('class', 'page');
-//         this.element.textContent = 'This is PageComponent';
-//     }
-//     attachTo(parent: HTMLElement, position: InsertPosition = 'afterbegin') {
-//         parent.insertAdjacentElement(position, this.element);
-//     }
-// }
-
 export class PageComponent extends BaseComponent<HTMLUListElement> implements Composable{
-    constructor() {
+    constructor(private pageItemConstructor: SectionContainerConstructor) {
         super(`<ul class="page"></ul>`);
     }
 
     addChild(section: Component) {
-        const item = new PageItemComponent();
+        const item = new this.pageItemConstructor();
         item.addChild(section); // 각 section을 page-item__body에 삽입
         item.attachTo(this.element, 'beforeend'); // this.element == <ul class="page"></ul>        
         item.setOnCloseListener(() => {
