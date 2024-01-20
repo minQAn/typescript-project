@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 @font-face {
     font-family: 'RubikDoodleShadow';
     src: url(../assets/fonts/Rubik_Doodle_Shadow/RubikDoodleShadow-Regular.ttf);
 }
 
 :root {
-    --bg-main-color: #00000080; /* last two digits are related to opacity*/
+    --bg-main-color: #00000080;
+    /* last two digits are related to opacity*/
     --bg-accent-color: #2d2d2d;
     --accent-color: #f64435;
     --text-accent-color: #ffe498;
@@ -20,7 +22,7 @@
 }
 
 li {
-    list-style: none;        
+    list-style: none;
 }
 
 p {
@@ -29,6 +31,8 @@ p {
 
 label {
     color: var(--text-accent-color);
+    display: inline-block;
+    min-width: 60px;
 }
 
 dialog {
@@ -77,23 +81,26 @@ body {
 
 /* Form과 관련된 태그들은 font-familly가 상속이 안된다고 한다. ex) button, textarea, text box, select*/
 /* https://dev-hyun.tistory.com/185 */
-.create-button {    
+.create-button {
     margin: 0.1em 0.2em;
     text-align: center;
-    user-select: none; /* 텍스트 선택 안됨 */
+    user-select: none;
+    /* 텍스트 선택 안됨 */
     padding: 1em 3em;
-    text-transform: uppercase; /* 대문자로 변경 */
+    text-transform: uppercase;
+    /* 대문자로 변경 */
     font-weight: 500;
     font-size: 0.8em;
     color: white;
     background-color: var(--accent-color);
     border-color: var(--accent-color);
-    border-radius: 2px;      
+    border-radius: 2px;
 }
 
 .document {
     height: 100%;
-    overflow-y: auto; /* to make scrollable */
+    overflow-y: auto;
+    /* to make scrollable */
     background-color: var(--document-bg-color);
     /* Firefox */
     scrollbar-width: 6px;
@@ -111,7 +118,7 @@ body {
 }
 
 /* 드래그할 수 있는 스크롤 손잡이 */
-.document::-webkit-scrollbar-thumb { 
+.document::-webkit-scrollbar-thumb {
     /* Safari and Chrome */
     background-color: var(--accent-color);
 }
@@ -134,7 +141,15 @@ body {
     width: 100%;
     height: 100%;
     font-size: 1.2rem;
-    background-color: var(--document-bg-color);    
+    background-color: var(--document-bg-color);
+}
+
+.dialog__bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 .dialog__container {
@@ -147,4 +162,105 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
     box-shadow: 2px 2px 20px var(--shadow-color);
+}
+
+.form__container {
+    display: flex;
+    align-items: start;
+    margin-bottom: 1em;
+}
+
+.close {
+    align-self: flex-end;
+    padding: 0.2rem;
+    color: var(--accent-color);
+    font-size: 28px;
+    font-weight: bold;
+    margin: 3px;
+    transition: color 250ms ease;
+}
+
+.close:hover,
+.close:focus {
+    transform: scale(1.5);
+    color: var(--shadow-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dialog__submit {
+    align-self: flex-end;
+    padding: 0.5em 1.5em;
+}
+
+/* -- PAGE ITEM -- */
+.page-item {
+    margin: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px 2px 6px var(--shadow-color);
+    background: var(--bg-accent-color);
+    background: var(--component-bg-gradient);
+}
+
+.page-item__controls {
+    padding-right: 0.5em;
+}
+
+.page-item__title {
+    color: var(--text-accent-color);
+}
+
+.page-item {
+    width: 100%;
+}
+.page-item__body {
+    width: 100%;
+}
+
+/* -- Image & Video -- */
+.video,
+.image {
+    display: flex;
+    width: 100%;
+    height: 250px;
+}
+
+.video__player,
+.image__holder {
+    flex: 60% 1 1;
+}
+
+.video__title,
+.image__title {
+    flex: 40% 1 1;
+    margin-left: 0.5em;
+}
+
+.video__iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+.image__thumbnail {
+    width: 100%;
+    height: 100%;
+}
+
+/* -- Note -- */
+.note {
+    padding: 0.5em;
+}
+
+/* -- TODO -- */
+.todo {
+    padding: 0.5em;
+}
+
+.todo__list,
+.todo-label {
+    padding: 1em;
+    color: var(--smokywhit);
 }
