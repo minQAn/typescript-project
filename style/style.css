@@ -19,6 +19,7 @@
     --smokywhite: #dddbd8;
     --black: #000000;
     --translucent-black: #00000099;
+    --drag-opacity: 0.2;
 }
 
 li {
@@ -263,4 +264,27 @@ body {
 .todo-label {
     padding: 1em;
     color: var(--smokywhit);
+}
+
+/* -- Drag and Drop -- */
+.mute-children * { /* Section 자신은 포함 안하고 모든 자식요소들을.. */
+    pointer-events: none;
+}
+
+.lifted {
+    animation: drag_start 500ms;
+    opacity: var(--drag-opacity)    /* 여기서 0.2 설정을 안하면 애니메이션이 끝나고 opacity 1로 돌아옴 */
+}
+
+@keyframes drag_start {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: var(--drag-opacity);
+    }
+}
+
+.drop-area {
+    border: 2px solid var(--accent-color);
 }
